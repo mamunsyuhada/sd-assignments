@@ -4,3 +4,8 @@
 ```sh
 ./countfiles.sh <directorytarget> ....<directorytarget>
 ```
+
+### Rename JPG Files with This Day Prefix
+```sh
+./renamejpg.sh
+```
