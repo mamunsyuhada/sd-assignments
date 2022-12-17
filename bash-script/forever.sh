@@ -11,18 +11,21 @@ case "$1" in
     if [[ !(-f $LOCKFILE) ]]; then
       tmp/foreverserver &
       touch $LOCKFILE
-      echo -e "${OnGreen}foreverserver is started${ColorOff}"
+      PID="`cat /tmp/foreverserver.pid`"
+      echo -e "${OnGreen}foreverserver ($PID) is started${ColorOff}"
     else
-      echo -e "${OnWhite}foreverserver is starting${ColorOff}"
+      PID="`cat /tmp/foreverserver.pid`"
+      echo -e "${OnWhite}foreverserver ($PID) is starting${ColorOff}"
     fi
     ;;
   stop)
     if [[ -f $LOCKFILE ]]; then
-      kill $(cat /tmp/foreverserver.pid)
+      PID="`cat /tmp/foreverserver.pid`"
+      kill $PID
       rm -rf $LOCKFILE
-      echo -e "${OnRed}foreverserver is stoped ....${ColorOff}"
+      echo -e "${OnRed}foreverserver ($PID) is stoped${ColorOff}"
     else
-      echo -e "${OnWhite}foreverserver was stoped ....${ColorOff}"
+      echo -e "${OnWhite}foreverserver was stoped${ColorOff}"
     fi
     ;;
   *)

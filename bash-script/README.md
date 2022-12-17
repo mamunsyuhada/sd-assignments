@@ -31,12 +31,12 @@ printf "$result\r"
 
 #### result
 ```sh
-# ./countfiles.sh <directorytarget> ....<directorytarget>
-bash countfiles.sh example/ ./ tmp/ img/
-# example/ : 7
-# ./ : 11
-# tmp/ : 1
-# img/ : 7
+> # ./countfiles.sh <directorytarget> ....<directorytarget>
+❯ bash countfiles.sh example/ ./ tmp/ img/
+example/ : 7
+./ : 12
+tmp/ : 2
+img/ : 7
 ```
 
 ### Rename JPG Files with This Day Prefix
@@ -61,30 +61,30 @@ done
 ```
 #### result
 ```sh
-bash renamejpg.sh
-# backend.jpg     --->    20221217-backend.jpg
-# interview.jpg   --->    20221217-interview.jpg
-# lang.jpg        --->    20221217-lang.jpg
-# meme.jpg        --->    20221217-meme.jpg
-# memedev.jpg     --->    20221217-memedev.jpg
-# proggamer.jpg   --->    20221217-proggamer.jpg
-# programmer.jpg  --->    20221217-programmer.jpg
-ls -l
-# total 597
-# -rw-r--r-- 1 praktis-mamun 197121  67386 Dec 17 03:29 20221217-backend.jpg
-# -rw-r--r-- 1 praktis-mamun 197121  19964 Dec 17 03:27 20221217-interview.jpg
-# -rw-r--r-- 1 praktis-mamun 197121 103133 Dec 17 03:26 20221217-lang.jpg
-# -rw-r--r-- 1 praktis-mamun 197121  50613 Dec 17 03:28 20221217-meme.jpg
-# -rw-r--r-- 1 praktis-mamun 197121 229220 Dec 17 03:29 20221217-memedev.jpg
-# -rw-r--r-- 1 praktis-mamun 197121  57669 Dec 17 03:28 20221217-proggamer.jpg
-# -rw-r--r-- 1 praktis-mamun 197121  46835 Dec 17 03:26 20221217-programmer.jpg
-# -rwxr-xr-x 1 praktis-mamun 197121    663 Dec 17 15:28 countfiles.sh
-# drwxr-xr-x 1 praktis-mamun 197121      0 Dec 17 03:10 example
-# -rwxr-xr-x 1 praktis-mamun 197121    790 Dec 17 15:28 forever.sh
-# drwxr-xr-x 1 praktis-mamun 197121      0 Dec 17 09:52 img
-# -rw-r--r-- 1 praktis-mamun 197121   3192 Dec 17 15:44 README.md
-# -rwxr-xr-x 1 praktis-mamun 197121    376 Dec 17 15:29 renamejpg.sh
-# drwxr-xr-x 1 praktis-mamun 197121      0 Dec 17 15:22 tmp
+❯ ll | grep -v .sh |grep .jpg
+-rw-r--r-- 1 praktis-mamun 197121  66K Dec 17 03:29 backend.jpg
+-rw-r--r-- 1 praktis-mamun 197121  20K Dec 17 03:27 interview.jpg
+-rw-r--r-- 1 praktis-mamun 197121 101K Dec 17 03:26 lang.jpg
+-rw-r--r-- 1 praktis-mamun 197121  50K Dec 17 03:28 meme.jpg
+-rw-r--r-- 1 praktis-mamun 197121 224K Dec 17 03:29 memedev.jpg
+-rw-r--r-- 1 praktis-mamun 197121  57K Dec 17 03:28 proggamer.jpg
+-rw-r--r-- 1 praktis-mamun 197121  46K Dec 17 03:26 programmer.jpg
+❯ bash renamejpg.sh
+backend.jpg     --->    20221217-backend.jpg
+interview.jpg   --->    20221217-interview.jpg
+lang.jpg        --->    20221217-lang.jpg
+meme.jpg        --->    20221217-meme.jpg
+memedev.jpg     --->    20221217-memedev.jpg
+proggamer.jpg   --->    20221217-proggamer.jpg
+programmer.jpg  --->    20221217-programmer.jpg
+❯ ll | grep -v .sh |grep .jpg
+-rw-r--r-- 1 praktis-mamun 197121  66K Dec 17 03:29 20221217-backend.jpg
+-rw-r--r-- 1 praktis-mamun 197121  20K Dec 17 03:27 20221217-interview.jpg
+-rw-r--r-- 1 praktis-mamun 197121 101K Dec 17 03:26 20221217-lang.jpg
+-rw-r--r-- 1 praktis-mamun 197121  50K Dec 17 03:28 20221217-meme.jpg
+-rw-r--r-- 1 praktis-mamun 197121 224K Dec 17 03:29 20221217-memedev.jpg
+-rw-r--r-- 1 praktis-mamun 197121  57K Dec 17 03:28 20221217-proggamer.jpg
+-rw-r--r-- 1 praktis-mamun 197121  46K Dec 17 03:26 20221217-programmer.jpg
 ```
 
 ### Start Stop Forever Server
@@ -92,45 +92,51 @@ ls -l
 ```sh
 #!/bin/bash
 # repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/forever.sh
-
-On_Red='\033[41m'
-On_Green='\033[42m'
-On_White='\033[47m'
-On_Yellow='\033[43m'
-Color_Off='\033[0m'
-
+OnRed='\033[41m'
+OnGreen='\033[42m'
+OnWhite='\033[47m'
+OnYellow='\033[43m'
+ColorOff='\033[0m'
 LOCKFILE=tmp/foreverserver.lock
-killForever(){
-  if [[ -f $LOCKFILE ]]; then
-    kill $(cat /tmp/foreverserver.pid)
-    rm -rf $LOCKFILE
-    echo -e "${On_Red}foreverserver is stoped ....${Color_Off}"
-  else
-    echo -e "${On_White}foreverserver was stoped ....${Color_Off}"
-  fi
-}
-
 case "$1" in
   start)
-    killForever
-    tmp/foreverserver &
-    touch $LOCKFILE
-    echo -e "${On_Green}foreverserver is starting with PID.... `cat /tmp/foreverserver.pid`${Color_Off}"
+    if [[ !(-f $LOCKFILE) ]]; then
+      tmp/foreverserver &
+      touch $LOCKFILE
+      PID="`cat /tmp/foreverserver.pid`"
+      echo -e "${OnGreen}foreverserver ($PID) is started${ColorOff}"
+    else
+      PID="`cat /tmp/foreverserver.pid`"
+      echo -e "${OnWhite}foreverserver ($PID) is starting${ColorOff}"
+    fi
     ;;
   stop)
-    killForever
+    if [[ -f $LOCKFILE ]]; then
+      PID="`cat /tmp/foreverserver.pid`"
+      kill $PID
+      rm -rf $LOCKFILE
+      echo -e "${OnRed}foreverserver ($PID) is stoped${ColorOff}"
+    else
+      echo -e "${OnWhite}foreverserver was stoped${ColorOff}"
+    fi
     ;;
   *)
-    echo -e "${On_Yellow}Usage: $0 {start|stop}${Color_Off}"
+    echo -e "${OnYellow}Usage: $0 {start|stop}${ColorOff}"
     ;;
 esac
 ```
 #### result
 ```sh
-bash forever.sh start # start server
-# foreverserver was stoped ....
-# foreverserver is starting with PID.... 3626
-
-bash forever.sh stop
-# foreverserver is stoped ....
+❯ bash forever.sh start
+foreverserver (3969) is started
+❯ bash forever.sh start
+foreverserver (3969) is starting
+❯ ls tmp
+foreverserver  foreverserver.lock
+❯ bash forever.sh stop
+foreverserver (3969) is stoped
+❯ bash forever.sh stop
+foreverserver was stoped
+❯ bash forever.sh stop
+foreverserver was stoped
 ```
