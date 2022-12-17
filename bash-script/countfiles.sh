@@ -4,7 +4,7 @@ mypath="`pwd`"
 countFiles() {
   # https://stackoverflow.com/questions/18062778/how-to-hide-command-output-in-bash
   cd $1 &> /dev/null
-  if [ "$?" == "1" ]; then
+  if [[ "$?" == "1" ]]; then
     echo "Usage: ./countfiles.sh <directory path> ....<directory path>"
     exit 1
   fi

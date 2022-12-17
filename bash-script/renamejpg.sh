@@ -4,7 +4,7 @@ THIS_DAY=`date +%Y%m%d`
 for IMAGE in `ls *.jpg`
 do
   # is jpg file generated in thisday ? 
-  if [ ${IMAGE:0:8} == THIS_DAY ]; then
+  if [[ ${IMAGE:0:8} == THIS_DAY ]]; then
     continue
   fi
 
