@@ -1,4 +1,4 @@
-# Bash Script
+# Bash Script | [Repo](https://github.com/mamunsyuhada/sd-assignments/edit/master/bash-script/README.md)
 
 ### Count File in a Directory
 #### code
