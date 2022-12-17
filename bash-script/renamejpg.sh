@@ -1,0 +1,12 @@
+#!/bin/bash
+THIS_DAY=`date +%Y%m%d`
+for IMAGE in `ls *.jpg`
+do
+  if [ ${IMAGE:0:8} == THIS_DAY ]; then
+    continue
+  fi
+  RESULT=$THIS_DAY
+  RESULT+="-$IMAGE"
+  mv $IMAGE $RESULT
+  printf "$IMAGE\t--->\t$RESULT\n\r"
+done
