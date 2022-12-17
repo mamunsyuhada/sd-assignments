@@ -70,6 +70,9 @@ bash renamejpg.sh
 # memedev.jpg     --->    20221217-memedev.jpg
 # proggamer.jpg   --->    20221217-proggamer.jpg
 # programmer.jpg  --->    20221217-programmer.jpg
+ls
+# 20221217-backend.jpg    20221217-lang.jpg  20221217-memedev.jpg    20221217-programmer.jpg  example     img        renamejpg.sh
+# 20221217-interview.jpg  20221217-meme.jpg  20221217-proggamer.jpg  countfiles.sh            forever.sh  README.md  tmp
 ```
 
 ### Start Stop Forever Server
