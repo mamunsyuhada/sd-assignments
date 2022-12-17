@@ -1,34 +1,31 @@
 #!/bin/bash
 # repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/forever.sh
-
-On_Red='\033[41m'
-On_Green='\033[42m'
-On_White='\033[47m'
-On_Yellow='\033[43m'
-Color_Off='\033[0m'
-
+OnRed='\033[41m'
+OnGreen='\033[42m'
+OnWhite='\033[47m'
+OnYellow='\033[43m'
+ColorOff='\033[0m'
 LOCKFILE=tmp/foreverserver.lock
-killForever(){
-  if [[ -f $LOCKFILE ]]; then
-    kill $(cat /tmp/foreverserver.pid)
-    rm -rf $LOCKFILE
-    echo -e "${On_Red}foreverserver is stoped ....${Color_Off}"
-  else
-    echo -e "${On_White}foreverserver was stoped ....${Color_Off}"
-  fi
-}
-
 case "$1" in
   start)
-    killForever
-    tmp/foreverserver &
-    touch $LOCKFILE
-    echo -e "${On_Green}foreverserver is starting with PID.... `cat /tmp/foreverserver.pid`${Color_Off}"
+    if [[ !(-f $LOCKFILE) ]]; then
+      tmp/foreverserver &
+      touch $LOCKFILE
+      echo -e "${OnGreen}foreverserver is started${ColorOff}"
+    else
+      echo -e "${OnWhite}foreverserver is starting${ColorOff}"
+    fi
     ;;
   stop)
-    killForever
+    if [[ -f $LOCKFILE ]]; then
+      kill $(cat /tmp/foreverserver.pid)
+      rm -rf $LOCKFILE
+      echo -e "${OnRed}foreverserver is stoped ....${ColorOff}"
+    else
+      echo -e "${OnWhite}foreverserver was stoped ....${ColorOff}"
+    fi
     ;;
   *)
-    echo -e "${On_Yellow}Usage: $0 {start|stop}${Color_Off}"
+    echo -e "${OnYellow}Usage: $0 {start|stop}${ColorOff}"
     ;;
 esac

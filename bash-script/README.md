@@ -2,7 +2,6 @@
 
 ### Count File in a Directory
 #### code
-
 ```sh
 #!/bin/bash
 # repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/countfiles.sh
@@ -70,9 +69,22 @@ bash renamejpg.sh
 # memedev.jpg     --->    20221217-memedev.jpg
 # proggamer.jpg   --->    20221217-proggamer.jpg
 # programmer.jpg  --->    20221217-programmer.jpg
-ls
-# 20221217-backend.jpg    20221217-lang.jpg  20221217-memedev.jpg    20221217-programmer.jpg  example     img        renamejpg.sh
-# 20221217-interview.jpg  20221217-meme.jpg  20221217-proggamer.jpg  countfiles.sh            forever.sh  README.md  tmp
+ls -l
+# total 597
+# -rw-r--r-- 1 praktis-mamun 197121  67386 Dec 17 03:29 20221217-backend.jpg
+# -rw-r--r-- 1 praktis-mamun 197121  19964 Dec 17 03:27 20221217-interview.jpg
+# -rw-r--r-- 1 praktis-mamun 197121 103133 Dec 17 03:26 20221217-lang.jpg
+# -rw-r--r-- 1 praktis-mamun 197121  50613 Dec 17 03:28 20221217-meme.jpg
+# -rw-r--r-- 1 praktis-mamun 197121 229220 Dec 17 03:29 20221217-memedev.jpg
+# -rw-r--r-- 1 praktis-mamun 197121  57669 Dec 17 03:28 20221217-proggamer.jpg
+# -rw-r--r-- 1 praktis-mamun 197121  46835 Dec 17 03:26 20221217-programmer.jpg
+# -rwxr-xr-x 1 praktis-mamun 197121    663 Dec 17 15:28 countfiles.sh
+# drwxr-xr-x 1 praktis-mamun 197121      0 Dec 17 03:10 example
+# -rwxr-xr-x 1 praktis-mamun 197121    790 Dec 17 15:28 forever.sh
+# drwxr-xr-x 1 praktis-mamun 197121      0 Dec 17 09:52 img
+# -rw-r--r-- 1 praktis-mamun 197121   3192 Dec 17 15:44 README.md
+# -rwxr-xr-x 1 praktis-mamun 197121    376 Dec 17 15:29 renamejpg.sh
+# drwxr-xr-x 1 praktis-mamun 197121      0 Dec 17 15:22 tmp
 ```
 
 ### Start Stop Forever Server
