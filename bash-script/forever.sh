@@ -1,10 +1,6 @@
 #!/bin/bash
 # repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/forever.sh
-OnRed='\033[41m'
-OnGreen='\033[42m'
-OnWhite='\033[47m'
-OnYellow='\033[43m'
-ColorOff='\033[0m'
+OnRed='\033[41m' OnGreen='\033[42m' OnWhite='\033[47m' OnYellow='\033[43m' ColorOff='\033[0m'
 LOCKFILE=tmp/foreverserver.lock
 case "$1" in
   start)
