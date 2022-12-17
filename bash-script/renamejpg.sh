@@ -1,4 +1,6 @@
 #!/bin/bash
+# repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/countfiles.sh
+
 THIS_DAY=`date +%Y%m%d`
 
 for IMAGE in `ls *.jpg`
