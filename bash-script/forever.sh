@@ -26,5 +26,6 @@ case "$1" in
     ;;
   *)
     echo -e "${OnYellow}Usage: $0 {start|stop}${ColorOff}"
+    exit 1
     ;;
 esac
