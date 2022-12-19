@@ -1,8 +1,8 @@
 #!/bin/bash
 # repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/countfiles.sh
 
-result=""
-mypath="`pwd`"
+RESULT=""
+CURRENT_PATH="`pwd`"
 countFiles() {
   # https://stackoverflow.com/questions/18062778/how-to-hide-command-output-in-bash
   cd $1 &> /dev/null
@@ -12,13 +12,13 @@ countFiles() {
   fi
   # https://devconnected.com/how-to-count-files-in-directory-on-linux/
   # -v = not match, "/" indicates a directory
-  result+="$1 : `ls -p . | grep -v / | wc -l`"
-  result+="\n"
-  # back to first mypath
-  cd $mypath &> /dev/null
+  RESULT+="$1 : `ls -p . | grep -v / | wc -l`"
+  RESULT+="\n"
+  # back to first CURRENT_PATH
+  cd $CURRENT_PATH &> /dev/null
 }
 for arg in "$@"
 do
   countFiles "$arg"
 done
-printf "$result\r"
+printf "$RESULT\r"
