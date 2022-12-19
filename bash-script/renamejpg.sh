@@ -1,5 +1,5 @@
 #!/bin/bash
-# repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/countfiles.sh
+# repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/renamejpg.sh
 
 THIS_DAY=`date +%Y%m%d`
 
