@@ -6,8 +6,8 @@
 #!/bin/bash
 # repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/countfiles.sh
 
-result=""
-mypath="`pwd`"
+RESULT=""
+CURRENT_PATH="`pwd`"
 countFiles() {
   # https://stackoverflow.com/questions/18062778/how-to-hide-command-output-in-bash
   cd $1 &> /dev/null
@@ -17,16 +17,16 @@ countFiles() {
   fi
   # https://devconnected.com/how-to-count-files-in-directory-on-linux/
   # -v = not match, "/" indicates a directory
-  result+="$1 : `ls -p . | grep -v / | wc -l`"
-  result+="\n"
-  # back to first mypath
-  cd $mypath &> /dev/null
+  RESULT+="$1 : `ls -p . | grep -v / | wc -l`"
+  RESULT+="\n"
+  # back to first CURRENT_PATH
+  cd $CURRENT_PATH &> /dev/null
 }
 for arg in "$@"
 do
   countFiles "$arg"
 done
-printf "$result\r"
+printf "$RESULT\r"
 ```
 
 #### result
@@ -44,7 +44,7 @@ img/ : 7
 #### code
 ```sh
 #!/bin/bash
-# repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/countfiles.sh
+# repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/renamejpg.sh
 THIS_DAY=`date +%Y%m%d`
 for IMAGE in `ls *.jpg`
 do
@@ -52,7 +52,6 @@ do
   if [[ ${IMAGE:0:8} == THIS_DAY ]]; then
     continue
   fi
-
   RESULT=$THIS_DAY
   RESULT+="-$IMAGE"
   mv $IMAGE $RESULT
@@ -92,11 +91,7 @@ programmer.jpg  --->    20221217-programmer.jpg
 ```sh
 #!/bin/bash
 # repo : https://github.com/mamunsyuhada/sd-assignments/blob/master/bash-script/forever.sh
-OnRed='\033[41m'
-OnGreen='\033[42m'
-OnWhite='\033[47m'
-OnYellow='\033[43m'
-ColorOff='\033[0m'
+OnRed='\033[41m' OnGreen='\033[42m' OnWhite='\033[47m' OnYellow='\033[43m' ColorOff='\033[0m'
 LOCKFILE=tmp/foreverserver.lock
 case "$1" in
   start)
@@ -122,6 +117,7 @@ case "$1" in
     ;;
   *)
     echo -e "${OnYellow}Usage: $0 {start|stop}${ColorOff}"
+    exit 1
     ;;
 esac
 ```
